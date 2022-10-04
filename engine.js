@@ -163,17 +163,12 @@ module.exports = function(options) {
           default: options.defaultSubject,
           maxLength: maxHeaderWidth - (options.exclamationMark ? 1 : 0),
           leadingLabel: answers => {
-
-
             let scope = '';
             const providedScope = getProvidedScope(answers);
             if (providedScope && providedScope !== 'none') {
               scope = `(${providedScope})`;
             }
 
-            if(answers.jira && options.jiraLocation === 'post-body') {
-              return `${answers.type}${scope}:`;
-            }
             const jiraWithDecorators = decorateJiraIssue(answers.jira, options);
             return getJiraIssueLocation(options.jiraLocation, answers.type, scope, jiraWithDecorators, '').trim();
           },
